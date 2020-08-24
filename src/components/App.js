@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Item from './Item';
 import Create from './Create';
 
-
 function App() {
 
   const [items, setItems] = useState([]);
@@ -22,6 +21,14 @@ function App() {
     });
   }
 
+  function changeItem(id, content) {
+    setItems(prevItems => {
+      var helperArray = [...prevItems];
+      helperArray[id].content = content;
+      return helperArray;
+    });
+  }
+
   return (
     <div>
       <Create onAdd={addItem} />
@@ -32,6 +39,7 @@ function App() {
             id={index}
             content={singleItem.content}
             onDelete={deleteItem}
+            onModification={changeItem}
           />
         );
       })}
